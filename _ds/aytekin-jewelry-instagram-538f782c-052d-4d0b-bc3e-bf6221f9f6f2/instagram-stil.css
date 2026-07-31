@@ -1,0 +1,135 @@
+/* Aytekin Jewelry — Instagram stil token'ları + 1080×1080 post iskeleti
+   Tema: Mehtap (soğuk-mistik-gece, 925 gümüş-first)
+   Yazı tipi kararı: Great Vibes (kaligrafi vurgu) + Outfit (diğer her şey)
+   Fontlar Google Fonts'tan yüklenir — head'e şu satırı ekleyin:
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Outfit:wght@300;400;500;600&display=swap">
+*/
+
+:root {
+  color-scheme: light;
+
+  /* Renkler — Mehtap */
+  --m-bg: #F8F8FA;
+  --m-soft: #ECECEF;
+  --m-divider: #DCDCE2;
+  --m-silver: #909098;
+  --m-mid: #5A6480;
+  --m-navy: #0F1A2E;          /* CTA zemini, fiyat, küçük güçlü öğeler */
+  --m-navy-display: #1C2E4A;  /* Büyük başlık rengi — lacivert karakter görünür kalır */
+  --m-light: color-mix(in srgb, #909098 55%, #ffffff); /* koyu zeminde gümüş */
+
+  /* Yazı tipleri */
+  --font-script: 'Great Vibes', cursive;   /* yalnız başlık 1. satırı */
+  --font-sans: 'Outfit', sans-serif;       /* diğer her şey */
+}
+
+/* ── 1080×1080 post iskeleti ─────────────────────────────── */
+
+.post {
+  width: 1080px;
+  height: 1080px;
+  box-sizing: border-box;
+  background: var(--m-bg);
+  padding: 84px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: var(--font-sans);
+  color: var(--m-navy);
+}
+
+.post.dark { background: var(--m-navy); color: #F8F8FA; }
+
+.post .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 19px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--m-mid);
+  margin-bottom: 52px;
+}
+.post.dark .eyebrow { color: var(--m-light); }
+
+.post .head { margin-bottom: 36px; }
+.post .head .l1 {
+  display: block;
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: 116px;
+  line-height: 1.05;
+  letter-spacing: 0;
+  color: var(--m-navy-display);
+}
+.post.dark .head .l1 { color: #F8F8FA; }
+.post .head .l2 {
+  display: block;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 42px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--m-mid);
+  margin-top: 22px;
+}
+.post.dark .head .l2 { color: var(--m-light); }
+
+.post .body {
+  font-weight: 400;
+  font-size: 27px;
+  line-height: 1.55;
+  color: var(--m-mid);
+  max-width: 760px;
+  margin: 0 0 40px;
+  text-wrap: pretty;
+}
+.post.dark .body { color: rgba(248, 248, 250, 0.72); }
+
+.post .meta {
+  font-weight: 600;
+  font-size: 24px;
+  font-variant-numeric: tabular-nums;
+}
+.post .meta .dot { color: var(--m-silver); padding: 0 10px; font-weight: 400; }
+
+.post .spacer { flex: 1; }
+
+.post .cta {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 600;
+  font-size: 21px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: var(--m-navy);
+  color: #FFFFFF;
+  padding: 20px 38px;
+  border-radius: 9999px;
+  margin-bottom: 64px;
+}
+.post.dark .cta { background: #F8F8FA; color: var(--m-navy); }
+
+.post .foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.post .foot .wm {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 600;
+  font-size: 30px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.post .foot .handle {
+  font-weight: 400;
+  font-size: 21px;
+  letter-spacing: 0.02em;
+  color: var(--m-silver);
+}

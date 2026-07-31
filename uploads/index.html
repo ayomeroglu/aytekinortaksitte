@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aytekin Mücevherat — El emeği, gönül işi.</title>
+<meta name="description" content="2008'den beri İskenderun'da. 925 ayar gümüş, ustadan sizin hikâyenize.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lacivert:#0D1B2A;
+    --altin:#C9A84C;
+    --beyaz:#EDE6D6;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:auto}
+  body{
+    background:var(--lacivert);
+    color:var(--beyaz);
+    font-family:'Outfit',system-ui,sans-serif;
+    font-weight:300;
+  }
+
+  /* ---- üst bar: marka + altın progress ---- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:40;
+    display:flex;justify-content:center;align-items:center;
+    padding:18px 24px 14px;
+    pointer-events:none;
+    background:linear-gradient(to bottom, rgba(13,27,42,.55), rgba(13,27,42,0));
+  }
+  .marka{
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-weight:600;font-size:clamp(17px,2vw,21px);
+    letter-spacing:.34em;text-indent:.34em;
+    color:var(--beyaz);text-transform:uppercase;
+  }
+  .marka span{color:var(--altin)}
+  #progress{
+    position:fixed;top:0;left:0;height:2px;width:0%;z-index:41;
+    background:linear-gradient(90deg, rgba(201,168,76,.55), var(--altin));
+    box-shadow:0 0 8px rgba(201,168,76,.45);
+  }
+
+  /* ---- sahne ---- */
+  #sahne{position:fixed;inset:0;z-index:1}
+  #tuval{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .karartma{ /* alt scrim — yazı okunurluğu */
+    position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(to top, rgba(13,27,42,.62) 0%, rgba(13,27,42,.18) 26%, rgba(13,27,42,0) 45%);
+    opacity:0;transition:opacity .5s ease;
+  }
+
+  /* ---- yükleme ---- */
+  #yukleme{
+    position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:26px;
+    background:var(--lacivert);
+    transition:opacity .8s ease;
+  }
+  #yukleme.gitti{opacity:0;pointer-events:none}
+  #yukleme .marka{position:static}
+  #yukleme .cizgi{width:min(320px,60vw);height:1px;background:rgba(237,230,214,.14);overflow:hidden}
+  #yukleme .cizgi i{display:block;height:100%;width:0%;background:var(--altin);transition:width .25s ease}
+  #yukleme small{font-size:11px;letter-spacing:.32em;text-indent:.32em;color:rgba(237,230,214,.45);text-transform:uppercase}
+
+  /* ---- durak metinleri ---- */
+  .durak{
+    position:fixed;z-index:30;opacity:0;pointer-events:none;
+    max-width:min(560px,86vw);
+    transform:translateY(14px);
+    will-change:opacity,transform;
+  }
+  .durak .cizgi-ust{width:56px;height:1px;background:var(--altin);margin-bottom:20px}
+  .durak .kicker{
+    font-size:clamp(10px,1.1vw,12px);font-weight:400;
+    letter-spacing:.42em;text-indent:.42em;text-transform:uppercase;
+    color:var(--altin);margin-bottom:12px;
+  }
+  .durak h2{
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-weight:500;font-size:clamp(30px,4.6vw,54px);
+    line-height:1.12;color:var(--beyaz);
+    text-shadow:0 2px 24px rgba(13,27,42,.75);
+  }
+  .durak h2 em{font-style:italic;color:var(--altin)}
+  .durak p{
+    margin-top:14px;font-size:clamp(14px,1.5vw,17px);font-weight:300;
+    letter-spacing:.02em;color:rgba(237,230,214,.85);
+    text-shadow:0 1px 14px rgba(13,27,42,.8);
+  }
+  .sol-alt{left:max(5vw,28px);bottom:12vh;text-align:left}
+  .orta-alt{left:50%;bottom:11vh;transform:translate(-50%,14px);text-align:center}
+  .orta-alt .cizgi-ust{margin-left:auto;margin-right:auto}
+
+  .cta{
+    display:inline-block;margin-top:26px;padding:15px 34px;
+    border:1px solid var(--altin);color:var(--altin);
+    font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;
+    letter-spacing:.34em;text-indent:.34em;text-transform:uppercase;
+    text-decoration:none;background:rgba(13,27,42,.35);
+    backdrop-filter:blur(3px);
+    transition:background .35s ease,color .35s ease;
+    pointer-events:auto;
+  }
+  .cta:hover{background:var(--altin);color:var(--lacivert)}
+
+  /* ---- kaydırın ipucu ---- */
+  #ipucu{
+    position:fixed;bottom:26px;left:50%;transform:translateX(-50%);
+    z-index:35;display:flex;flex-direction:column;align-items:center;gap:9px;
+    color:rgba(237,230,214,.75);transition:opacity .6s ease;
+  }
+  #ipucu span{font-size:10px;letter-spacing:.42em;text-indent:.42em;text-transform:uppercase}
+  #ipucu svg{animation:in 2.1s ease-in-out infinite}
+  @keyframes in{0%,100%{transform:translateY(0);opacity:.9}50%{transform:translateY(7px);opacity:.35}}
+  #ipucu.gitti{opacity:0;pointer-events:none}
+
+  /* ---- scroll alanı ---- */
+  #ray{position:relative;z-index:0;width:100%}
+
+  /* ---- hareket azaltılmış mod ---- */
+  #statik{display:none}
+  @media (prefers-reduced-motion: reduce){
+    #ray,#sahne,#ipucu,#yukleme{display:none!important}
+    .durak{display:none}
+    #statik{display:block}
+    .bolum{position:relative;min-height:100vh;overflow:hidden;display:flex;align-items:flex-end}
+    .bolum img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1}
+    .bolum::after{content:"";position:absolute;inset:0;z-index:0;
+      background:linear-gradient(to top, rgba(13,27,42,.66), rgba(13,27,42,0) 50%)}
+    .bolum .durak-s{position:relative;z-index:1;padding:0 max(5vw,28px) 12vh;max-width:640px}
+    .bolum .durak-s .cizgi-ust{width:56px;height:1px;background:var(--altin);margin-bottom:20px}
+    .bolum .durak-s .kicker{font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--altin);margin-bottom:12px}
+    .bolum .durak-s h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:clamp(30px,4.6vw,54px);line-height:1.12}
+    .bolum .durak-s h2 em{font-style:italic;color:var(--altin)}
+    .bolum .durak-s p{margin-top:14px;font-size:16px;color:rgba(237,230,214,.85)}
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+<header><div class="marka">Aytekin <span>Mücevherat</span></div></header>
+
+<!-- yükleme perdesi -->
+<div id="yukleme">
+  <div class="marka">Aytekin <span>Mücevherat</span></div>
+  <div class="cizgi"><i id="yuklemeCizgi"></i></div>
+  <small>El emeği, gönül işi</small>
+</div>
+
+<!-- sabit sahne -->
+<div id="sahne">
+  <canvas id="tuval"></canvas>
+  <div class="karartma" id="karartma"></div>
+</div>
+
+<!-- durak metinleri -->
+<div class="durak sol-alt" id="durak0">
+  <div class="cizgi-ust"></div>
+  <div class="kicker">2008'den beri İskenderun'da</div>
+  <h2>Aytekin <em>Mücevherat</em></h2>
+  <p>Bir atölye, bir vitrin ve on sekiz yıllık bir söz: iyi işçilik.</p>
+</div>
+
+<div class="durak sol-alt" id="durak1">
+  <div class="cizgi-ust"></div>
+  <div class="kicker">Usta işi</div>
+  <h2>El emeği, <em>gönül işi.</em></h2>
+  <p>Her parça, bu tezgahta bir ustanın elinden geçer.</p>
+</div>
+
+<div class="durak sol-alt" id="durak2">
+  <div class="cizgi-ust"></div>
+  <div class="kicker">Atölye</div>
+  <h2>Işıltının arkasında <em>yılların ustalığı</em></h2>
+</div>
+
+<div class="durak orta-alt" id="durak3">
+  <div class="cizgi-ust"></div>
+  <div class="kicker">925 ayar gümüş</div>
+  <h2>Ustadan, <em>sizin hikâyenize</em></h2>
+  <a class="cta" href="#">Koleksiyonu Keşfet</a>
+</div>
+
+<!-- kaydırma ipucu -->
+<div id="ipucu">
+  <span>Kaydırın</span>
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+
+<!-- scroll rayı (yüksekliği JS belirler) -->
+<div id="ray"></div>
+
+<!-- prefers-reduced-motion: statik sahneler -->
+<div id="statik">
+  <section class="bolum"><img src="frames/kare_009.webp" alt="Aytekin Mücevherat mağaza girişi">
+    <div class="durak-s"><div class="cizgi-ust"></div><div class="kicker">2008'den beri İskenderun'da</div>
+    <h2>Aytekin <em>Mücevherat</em></h2><p>Bir atölye, bir vitrin ve on sekiz yıllık bir söz: iyi işçilik.</p></div></section>
+  <section class="bolum"><img src="frames/kare_048.webp" alt="Vitrindeki altın koleksiyonu">
+    <div class="durak-s"><div class="cizgi-ust"></div><div class="kicker">Usta işi</div>
+    <h2>El emeği, <em>gönül işi.</em></h2><p>Her parça, bu tezgahta bir ustanın elinden geçer.</p></div></section>
+  <section class="bolum"><img src="frames/kare_074.webp" alt="Atölye ve mağaza içi">
+    <div class="durak-s"><div class="cizgi-ust"></div><div class="kicker">Atölye</div>
+    <h2>Işıltının arkasında <em>yılların ustalığı</em></h2></div></section>
+  <section class="bolum"><img src="frames/kare_112.webp" alt="Yeşil mermer üzerinde altın Aytekin logosu">
+    <div class="durak-s"><div class="cizgi-ust"></div><div class="kicker">925 ayar gümüş</div>
+    <h2>Ustadan, <em>sizin hikâyenize</em></h2><a class="cta" href="#">Koleksiyonu Keşfet</a></div></section>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var azaltilmis = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(azaltilmis) return; // statik sürüm CSS ile devrede
+
+  /* ---------- ayarlar ---------- */
+  var TOPLAM = 120;                       // kare sayısı
+  var KLASOR = (Math.min(screen.width, screen.height) * (window.devicePixelRatio||1) <= 980)
+               ? 'frames-mobile' : 'frames';
+  var kaynak = function(i){ return KLASOR + '/kare_' + String(i).padStart(3,'0') + '.webp'; };
+
+  // zaman çizelgesi: hareket segmentleri + duraklar (Apple ritmi)
+  // ağırlık = o segmentin scroll payı
+  var DURAK_AGIRLIK = 34;
+  var seg = [
+    {t:'m', a:1,   b:9  },
+    {t:'d', k:9,   id:0 },
+    {t:'m', a:9,   b:48 },
+    {t:'d', k:48,  id:1 },
+    {t:'m', a:48,  b:74 },
+    {t:'d', k:74,  id:2 },
+    {t:'m', a:74,  b:112},
+    {t:'d', k:112, id:3, son:true},
+    {t:'m', a:112, b:120}
+  ];
+  seg.forEach(function(s){ s.w = (s.t==='m') ? (s.b - s.a) : DURAK_AGIRLIK; });
+  var W = seg.reduce(function(x,s){ return x + s.w; }, 0);
+  var off = 0;
+  seg.forEach(function(s){ s.p0 = off / W; off += s.w; s.p1 = off / W; });
+
+  /* ---------- eleman referansları ---------- */
+  var tuval = document.getElementById('tuval');
+  var ctx = tuval.getContext('2d');
+  var progress = document.getElementById('progress');
+  var ipucu = document.getElementById('ipucu');
+  var karartma = document.getElementById('karartma');
+  var yukleme = document.getElementById('yukleme');
+  var yuklemeCizgi = document.getElementById('yuklemeCizgi');
+  var ray = document.getElementById('ray');
+  var duraklar = [0,1,2,3].map(function(i){ return document.getElementById('durak'+i); });
+
+  /* ---------- scroll alanı ---------- */
+  function rayBoyut(){
+    var vh = window.innerHeight;
+    ray.style.height = Math.round(vh * 7) + 'px'; // ~7 ekran boyu yolculuk
+  }
+  rayBoyut();
+
+  /* ---------- kare yükleme ---------- */
+  var kareler = new Array(TOPLAM + 1);
+  var hazirIlk = false;
+  var ilkGrup = 24, yuklenen = 0, hataSayisi = 0;
+
+  function yukle(i, cb){
+    if(kareler[i]) { cb && cb(); return; }
+    var im = new Image();
+    im.onload = function(){ kareler[i] = im; cb && cb(); };
+    im.onerror = function(){ hataSayisi++; cb && cb(); };
+    im.src = kaynak(i);
+  }
+  // önce ilk grup, sonra kalanı arka planda
+  var siraIlk = []; for(var i=1;i<=ilkGrup;i++) siraIlk.push(i);
+  var siraKalan = []; for(var j=ilkGrup+1;j<=TOPLAM;j++) siraKalan.push(j);
+  // durak kareleri öncelikli
+  [9,48,74,112].forEach(function(k){ if(k>ilkGrup) siraKalan.unshift(k); });
+
+  function grupYukle(liste, paralel, herbiri, bitti){
+    var idx = 0, aktif = 0;
+    function sonraki(){
+      if(idx >= liste.length){ if(aktif===0 && bitti) bitti(); return; }
+      var n = liste[idx++]; aktif++;
+      yukle(n, function(){ aktif--; herbiri && herbiri(); sonraki(); });
+    }
+    for(var c=0;c<paralel;c++) sonraki();
+  }
+  grupYukle(siraIlk, 6, function(){
+    yuklenen++;
+    yuklemeCizgi.style.width = Math.round(yuklenen / ilkGrup * 100) + '%';
+  }, function(){
+    if(hataSayisi >= ilkGrup){
+      // kareler bulunamadı — kullanıcıya nedenini söyle
+      var uyari = yukleme.querySelector('small');
+      uyari.textContent = 'Kareler yüklenemedi';
+      var p = document.createElement('p');
+      p.style.cssText = 'max-width:80vw;text-align:center;font-size:13px;color:rgba(237,230,214,.7);letter-spacing:.05em';
+      p.textContent = 'index.html dosyası "frames" ve "frames-mobile" klasörleriyle aynı klasörden açılmalı. Lütfen aytekin-site klasörünün tamamını birlikte taşıyıp index.html\'i tarayıcıda öyle açın.';
+      yukleme.appendChild(p);
+      return;
+    }
+    hazirIlk = true;
+    yukleme.classList.add('gitti');
+    ciz(1);
+    grupYukle(siraKalan, 4, null, null);
+  });
+
+  /* ---------- çizim: cover-fit ---------- */
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  function tuvalBoyut(){
+    tuval.width = Math.round(window.innerWidth * dpr);
+    tuval.height = Math.round(window.innerHeight * dpr);
+  }
+  tuvalBoyut();
+
+  var sonCizilen = -1;
+  function ciz(n){
+    n = Math.max(1, Math.min(TOPLAM, Math.round(n)));
+    // yüklenmemişse geriye doğru en yakın hazır kareyi bul
+    var k = n; while(k > 1 && !kareler[k]) k--;
+    if(!kareler[k]) return;
+    if(k === sonCizilen) return;
+    sonCizilen = k;
+    var im = kareler[k];
+    var cw = tuval.width, ch = tuval.height;
+    var s = Math.max(cw / im.width, ch / im.height); // cover
+    var w = im.width * s, h = im.height * s;
+    ctx.drawImage(im, (cw - w) / 2, (ch - h) / 2, w, h);
+  }
+
+  /* ---------- scroll -> kare + duraklar ---------- */
+  var hedefKare = 1, guncelKare = 1;
+
+  function durakGorunur(id, oran, son){
+    // oran: durak içi ilerleme 0..1 — girişte fade-in, çıkışta fade-out
+    var o;
+    if(son){ o = Math.min(1, oran / .22); }           // final: girince kal
+    else if(oran < .2){ o = oran / .2; }
+    else if(oran > .82){ o = (1 - oran) / .18; }
+    else { o = 1; }
+    o = Math.max(0, Math.min(1, o));
+    var d = duraklar[id];
+    d.style.opacity = o;
+    var ty = (1 - o) * 14;
+    d.style.transform = (id === 3)
+      ? 'translate(-50%,' + ty + 'px)'
+      : 'translateY(' + ty + 'px)';
+    d.style.pointerEvents = (son && o > .9) ? 'auto' : 'none';
+    return o;
+  }
+
+  function hesapla(){
+    var maxS = document.documentElement.scrollHeight - window.innerHeight;
+    var p = maxS > 0 ? Math.max(0, Math.min(1, window.scrollY / maxS)) : 0;
+    progress.style.width = (p * 100) + '%';
+    if(p > 0.012) ipucu.classList.add('gitti'); else ipucu.classList.remove('gitti');
+
+    var scrimHedef = 0;
+    for(var i=0;i<seg.length;i++){
+      var s = seg[i];
+      if(p >= s.p0 && p <= s.p1 || (i === seg.length-1 && p > s.p1)){
+        var u = (s.p1 > s.p0) ? (p - s.p0) / (s.p1 - s.p0) : 1;
+        u = Math.max(0, Math.min(1, u));
+        if(s.t === 'm'){ hedefKare = s.a + (s.b - s.a) * u; }
+        else {
+          hedefKare = s.k;
+          var op = durakGorunur(s.id, u, !!s.son);
+          scrimHedef = Math.max(scrimHedef, op);
+        }
+      } else if(s.t === 'd'){
+        duraklar[s.id].style.opacity = 0;
+        duraklar[s.id].style.pointerEvents = 'none';
+      }
+    }
+    // sayfa sonunda finali açık tut
+    if(p >= seg[seg.length-2].p0){ scrimHedef = Math.max(scrimHedef, durakGorunur(3, 1, true)); }
+    karartma.style.opacity = scrimHedef * 0.9;
+  }
+
+  /* ---------- rAF döngüsü: lerp ile yumuşatma ---------- */
+  function dongu(){
+    guncelKare += (hedefKare - guncelKare) * 0.16;
+    if(Math.abs(hedefKare - guncelKare) < 0.02) guncelKare = hedefKare;
+    if(hazirIlk) ciz(guncelKare);
+    requestAnimationFrame(dongu);
+  }
+
+  window.addEventListener('scroll', hesapla, {passive:true});
+  window.addEventListener('resize', function(){
+    rayBoyut(); tuvalBoyut(); sonCizilen = -1; hesapla();
+    if(hazirIlk) ciz(guncelKare);
+  });
+
+  hesapla();
+  requestAnimationFrame(dongu);
+})();
+</script>
+</body>
+</html>

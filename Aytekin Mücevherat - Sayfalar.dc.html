@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_ds/aytekin-jewelry-instagram-538f782c-052d-4d0b-bc3e-bf6221f9f6f2/tokens/fontlar.css">
+<link rel="stylesheet" href="_ds/aytekin-jewelry-instagram-538f782c-052d-4d0b-bc3e-bf6221f9f6f2/instagram-stil.css">
+<link rel="stylesheet" href="_ds/aytekin-jewelry-instagram-538f782c-052d-4d0b-bc3e-bf6221f9f6f2/styles.css">
+<script src="assets/image-slot.js"></script>
+<script src="assets/catalog.js"></script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:#0F1A2E;font-family:'Outfit',system-ui,sans-serif;-webkit-font-smoothing:antialiased;color:#E7EAF1}
+  a{text-decoration:none;color:#E4CE92}
+  a:hover{color:#F3EFE4}
+  image-slot{--is-bg:#EDE4D5}
+  .navlink{position:relative;color:#C4CBD8;transition:color .3s ease}
+  .navlink::after{content:"";position:absolute;left:0;right:100%;bottom:-6px;height:1px;background:#E4CE92;transition:right .32s ease}
+  .navlink:hover,.navlink.on{color:#F3EFE4}
+  .navlink:hover::after,.navlink.on::after{right:0}
+  .icobtn{background:none;border:none;cursor:pointer;color:#E4CE92;display:grid;place-items:center;padding:6px;position:relative;transition:transform .25s ease}
+  .icobtn:hover{transform:translateY(-2px)}
+  .prodcard{position:relative;transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .35s ease}
+  .prodcard:hover{transform:translateY(-4px);border-color:rgba(198,164,92,.42)}
+  .prodcard .quick{opacity:0;transform:translateY(8px);transition:opacity .3s ease,transform .3s ease}
+  .prodcard:hover .quick{opacity:1;transform:translateY(0)}
+  .gold-btn{font-family:'Outfit';font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#0F1A2E;background:linear-gradient(180deg,#E4CE92,#A9812F);border:none;border-radius:999px;cursor:pointer;transition:filter .25s ease,transform .25s ease}
+  .gold-btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+  .ghost-btn{font-family:'Outfit';font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A6A16;background:transparent;border:1px solid rgba(198,164,92,.6);border-radius:999px;cursor:pointer;transition:background .25s ease}
+  .ghost-btn:hover{background:rgba(198,164,92,.12)}
+  .heart{background:rgba(10,18,32,.62);backdrop-filter:blur(4px);border:1px solid rgba(198,164,92,.3);border-radius:50%;width:36px;height:36px;display:grid;place-items:center;cursor:pointer;transition:transform .25s ease}
+  .heart:hover{transform:scale(1.08)}
+  .ov{position:fixed;inset:0;z-index:120;opacity:0;pointer-events:none;transition:opacity .35s ease}
+  .ov.open{opacity:1;pointer-events:auto}
+  .ov-scrim{position:absolute;inset:0;background:rgba(6,11,22,.72);backdrop-filter:blur(3px)}
+  .drawer{position:absolute;top:0;right:0;height:100%;width:420px;max-width:92vw;background:#FBF7F0;border-left:1px solid rgba(198,164,92,.2);box-shadow:-30px 0 80px -20px rgba(0,0,0,.7);transform:translateX(100%);transition:transform .4s cubic-bezier(.2,.7,.2,1);display:flex;flex-direction:column}
+  .ov.open .drawer{transform:translateX(0)}
+  .modal{position:absolute;top:50%;left:50%;transform:translate(-50%,-46%) scale(.97);opacity:0;transition:transform .4s cubic-bezier(.2,.7,.2,1),opacity .35s ease;width:min(1120px,95vw);max-height:92vh;overflow-y:auto;overflow-x:hidden;background:#FBF7F0;border:1px solid rgba(198,164,92,.3);border-radius:14px;box-shadow:0 40px 100px -30px rgba(0,0,0,.8)}
+  .ov.open .modal{transform:translate(-50%,-50%) scale(1);opacity:1}
+  .modal-sm{width:min(460px,94vw)}
+  input.fld{width:100%;background:#F1EADF;border:1px solid rgba(198,164,92,.35);border-radius:8px;padding:13px 15px;color:#22314B;font-family:'Outfit';font-size:14px;outline:none;transition:border-color .25s ease}
+  input.fld:focus{border-color:rgba(198,164,92,.6)}
+  input.fld::placeholder{color:#6E7A90}
+  .qtybtn{width:34px;height:34px;border-radius:8px;border:1px solid rgba(198,164,92,.3);background:transparent;color:#8A6A16;font-size:18px;cursor:pointer;display:grid;place-items:center}
+  .qtybtn:hover{background:rgba(198,164,92,.12)}
+  .tab{flex:1;padding:12px;font-family:'Outfit';font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#737D90;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:color .25s ease,border-color .25s ease}
+  .tab.on{color:#8A6A16;border-color:#8A6A16}
+  .toast{position:fixed;left:50%;bottom:32px;transform:translate(-50%,20px);z-index:200;background:linear-gradient(180deg,#E4CE92,#A9812F);color:#0F1A2E;font-family:'Outfit';font-weight:600;font-size:13px;letter-spacing:.04em;padding:13px 24px;border-radius:999px;box-shadow:0 18px 40px -12px rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+  .doc h3{font-family:'Great Vibes',cursive;font-weight:400;font-size:34px;color:#8A6A16;margin:26px 0 10px;line-height:1}
+  .doc h4{font-family:'Outfit';font-weight:600;font-size:15px;letter-spacing:.04em;color:#22314B;margin:20px 0 8px}
+  .doc p,.doc li{font-family:'Outfit';font-weight:300;font-size:14.5px;line-height:1.85;color:#46516A}
+  .doc ul{margin:6px 0 6px 20px;display:flex;flex-direction:column;gap:4px}
+  .doc strong{color:#22314B;font-weight:500}
+  .acc-q{width:100%;text-align:left;background:#FFFFFF;border:1px solid rgba(198,164,92,.14);border-radius:10px;padding:18px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:'Outfit';font-weight:500;font-size:15.5px;color:#22314B;transition:border-color .25s ease}
+  .acc-q:hover{border-color:rgba(198,164,92,.4)}
+  .acc-a{max-height:0;overflow:hidden;transition:max-height .4s ease;font-family:'Outfit';font-weight:300;font-size:14px;line-height:1.8;color:#46516A}
+  @media(max-width:820px){header{flex-wrap:wrap!important;padding:12px 16px!important}header nav{order:3;width:100%;overflow-x:auto;justify-content:flex-start!important;gap:20px!important;padding-top:6px}main section{padding-left:18px!important;padding-right:18px!important}footer{padding-left:20px!important;padding-right:20px!important}}
+  @media(max-width:900px){.rg3{grid-template-columns:repeat(2,1fr)!important}}
+  @media(max-width:560px){.rg3{grid-template-columns:1fr!important}}
+  @media(max-width:780px){.rg2,.doc2,.doc-grid{grid-template-columns:1fr!important;gap:26px!important}}
+  @media(max-width:900px){.qvgrid{grid-template-columns:1fr!important}.modal{max-height:90vh}}
+  @media(max-width:640px){.drawer{width:100vw!important}h1{font-size:46px!important}}
+  @media(max-width:900px){.qvpad{padding:26px 22px!important}}
+  @media(max-width:640px){[data-search-results]{grid-template-columns:1fr!important}.srchpanel{padding:20px 18px 24px!important}}
+</style>
+</helmet>
+
+<div data-root style="min-height:100vh;background:#F4EEE4;color:#22314B;display:flex;flex-direction:column;">
+
+  <!-- HEADER -->
+  <div style="background:linear-gradient(90deg,#B8934E,#E4CE92,#B8934E);color:#0F1A2E;font-family:'Outfit';font-weight:600;font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;text-align:center;padding:9px 20px;">925 Ayar Gümüş · İskenderun'dan · 1.500 ₺ üzeri kargo ücretsiz</div>
+  <header style="position:sticky;top:0;z-index:70;display:flex;align-items:center;justify-content:space-between;padding:14px 48px;background:rgba(15,26,46,.96);backdrop-filter:blur(8px);border-bottom:1px solid rgba(198,164,92,.2);">
+    <a data-home href="#" style="display:flex;align-items:center;gap:12px;">
+      <img src="assets/logo-mark.png" alt="Aytekin Mücevherat" style="height:44px;width:auto;object-fit:contain;">
+      <div style="display:flex;flex-direction:column;line-height:1;">
+        <span style="font-family:'Outfit';font-weight:600;font-size:16px;letter-spacing:.22em;color:#F3EFE4;">AYTEKİN</span>
+        <span style="font-family:'Outfit';font-weight:400;font-size:9px;letter-spacing:.4em;color:#A9812F;margin-top:3px;">MÜCEVHERAT</span>
+      </div>
+    </a>
+    <nav style="display:flex;align-items:center;gap:30px;font-family:'Outfit';font-weight:500;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;">
+      <a class="navlink" data-route="kolye" href="#/kolye">Kolye</a>
+      <a class="navlink" data-route="yuzuk" href="#/yuzuk">Yüzük</a>
+      <a class="navlink" data-route="bileklik" href="#/bileklik">Bileklik</a>
+      <a class="navlink" data-route="kupe" href="#/kupe">Küpe</a>
+      <a class="navlink" data-route="hakkinda" href="#/hakkinda">Hakkımızda</a>
+      <a class="navlink" data-route="sss" href="#/sss">SSS</a>
+      <a class="navlink" data-route="iletisim" href="#/iletisim">İletişim</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="icobtn" data-open="account" aria-label="Hesabım"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#E4CE92" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-5.5 8-5.5S18.5 16 20 20" stroke-linecap="round"/></svg></button>
+      <button class="icobtn" data-open="cart" aria-label="Sepetim">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E4CE92" stroke-width="1.5"><path d="M6 8h12l-1 12H7L6 8z" stroke-linejoin="round"/><path d="M9 8a3 3 0 0 1 6 0" stroke-linecap="round"/></svg>
+        <span data-cart-count style="position:absolute;top:-3px;right:-4px;min-width:17px;height:17px;padding:0 4px;border-radius:999px;background:#E4CE92;color:#0F1A2E;font-family:'Outfit';font-weight:700;font-size:10px;display:grid;place-items:center;opacity:0;transition:opacity .25s ease;">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ROUTED CONTENT -->
+  <main data-view style="flex:1;"></main>
+
+  <!-- FOOTER -->
+  <footer style="margin-top:20px;padding:52px 48px 30px;background:#0A1220;color:#AEB6C6;border-top:1px solid rgba(198,164,92,.18);">
+    <div class="rg2" style="max-width:1360px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <img src="assets/logo-mark.png" alt="Aytekin Mücevherat" style="height:46px;width:auto;object-fit:contain;">
+          <div><div style="font-family:'Outfit';font-weight:600;font-size:15px;letter-spacing:.2em;color:#F3EFE4;">AYTEKİN MÜCEVHERAT</div><div style="font-family:'Great Vibes',cursive;font-size:22px;color:#A9812F;line-height:1;margin-top:2px;">El emeği, gönül işi</div></div>
+        </div>
+        <p style="font-family:'Outfit';font-weight:300;font-size:13px;line-height:1.7;color:#737D90;margin-top:16px;max-width:300px;">2008'den beri İskenderun'da el işçiliğiyle 925 ayar gümüş takı üretiyor ve tamir ediyoruz.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:11px;font-family:'Outfit';font-weight:300;font-size:13.5px;">
+        <span style="font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#A9812F;margin-bottom:3px;">Alışveriş</span>
+        <a data-route="kolye" href="#/kolye">Kolyeler</a><a data-route="yuzuk" href="#/yuzuk">Yüzükler</a><a data-route="bileklik" href="#/bileklik">Bileklikler</a><a data-route="kupe" href="#/kupe">Küpeler</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:11px;font-family:'Outfit';font-weight:300;font-size:13.5px;">
+        <span style="font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#A9812F;margin-bottom:3px;">Kurumsal</span>
+        <a data-route="hakkinda" href="#/hakkinda">Hakkımızda</a><a data-route="sss" href="#/sss">Sıkça Sorulanlar</a><a data-route="iletisim" href="#/iletisim">İletişim</a><a data-route="teslimat-iade" href="#/teslimat-iade">Teslimat & İade</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:11px;font-family:'Outfit';font-weight:300;font-size:13.5px;">
+        <span style="font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#A9812F;margin-bottom:3px;">Sözleşmeler</span>
+        <a data-route="mesafeli-satis" href="#/mesafeli-satis">Mesafeli Satış Sözleşmesi</a><a data-route="gizlilik" href="#/gizlilik">Gizlilik & Çerez Politikası</a><a data-route="kvkk" href="#/kvkk">KVKK Aydınlatma Metni</a><a data-route="iade-degisim" href="#/iade-degisim">İade & Değişim</a>
+      </div>
+    </div>
+    <div style="max-width:1360px;margin:34px auto 0;padding-top:20px;border-top:1px solid rgba(198,164,92,.14);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'Outfit';font-weight:300;font-size:12px;color:#6E7A90;">
+      <span>© 2026 Aytekin Mücevherat · İskenderun, Hatay · Tüm hakları saklıdır.</span>
+      <span style="color:#737D90;">Güvenli ödeme · Kapıda ödeme · Havale/EFT</span>
+    </div>
+  </footer>
+
+  <!-- ACCOUNT MODAL -->
+  <div class="ov" data-ov="account">
+    <div class="ov-scrim" data-close></div>
+    <div class="modal modal-sm" style="padding:0;">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 24px 0;">
+        <img src="assets/logo-mark.png" alt="" style="height:40px;width:auto;">
+        <button class="icobtn" data-close aria-label="Kapat"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A6A16" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></button>
+      </div>
+      <div style="display:flex;padding:16px 24px 0;">
+        <button class="tab on" data-tab="login">Giriş Yap</button>
+        <button class="tab" data-tab="register">Kayıt Ol</button>
+      </div>
+      <div data-acc-body style="padding:24px;"></div>
+    </div>
+  </div>
+
+  <!-- CART DRAWER -->
+  <div class="ov" data-ov="cart">
+    <div class="ov-scrim" data-close></div>
+    <div class="drawer">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 24px;border-bottom:1px solid rgba(198,164,92,.16);">
+        <div style="font-family:'Outfit';font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:#22314B;">Sepetim</div>
+        <button class="icobtn" data-close aria-label="Kapat"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8A6A16" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></button>
+      </div>
+      <div data-cart-body style="flex:1;overflow:auto;padding:16px 20px;"></div>
+      <div data-cart-foot style="border-top:1px solid rgba(198,164,92,.16);padding:20px 24px;"></div>
+    </div>
+  </div>
+
+  <!-- QUICK-VIEW MODAL -->
+  <div class="ov" data-ov="quick">
+    <div class="ov-scrim" data-close></div>
+    <div class="modal" data-quick-body></div>
+  </div>
+
+  <div class="toast" data-toast></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props){ super(props); this.HOME='Aytekin%20M%C3%BCcevherat%20-%20Giri%C5%9F.dc.html'; }
+
+  componentDidMount(){
+    const root=this.el||document; this.root=root; this.A=window.AYTEKIN;
+    this.view=root.querySelector('[data-view]');
+    this.wireEvents(); this.refreshBadges(); this.renderAccount('login');
+    this._route=()=>this.route();
+    window.addEventListener('hashchange', this._route);
+    this._storeH=()=>this.refreshBadges();
+    window.addEventListener('aytekin:store', this._storeH);
+    this.route();
+  }
+
+  /* ---------- router ---------- */
+  route(){
+    const slug=(location.hash.replace(/^#\/?/,'')||'hakkinda').toLowerCase();
+    this.root.querySelectorAll('[data-route]').forEach(a=>a.classList.toggle('on',a.dataset.route===slug));
+    const cat=this.A.categories.find(c=>c.slug===slug);
+    if(cat) this.renderCategory(cat);
+    else if(this.CONTENT[slug]) this.renderDoc(slug);
+    else this.renderDoc('hakkinda');
+    window.scrollTo(0,0);
+  }
+
+  hero(kicker,title,sub){
+    return `<section style="max-width:1360px;margin:0 auto;padding:52px 48px 8px;">
+      <div style="font-family:'Outfit';font-weight:600;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:#A9812F;margin-bottom:8px;">✦ ${kicker}</div>
+      <h1 style="font-family:'Great Vibes',cursive;font-weight:400;font-size:64px;line-height:1;color:#22314B;">${title}</h1>
+      ${sub?`<p style="font-family:'Outfit';font-weight:300;font-size:15px;color:#46516A;margin-top:12px;max-width:640px;line-height:1.7;">${sub}</p>`:''}
+    </section>`;
+  }
+
+  renderCategory(cat){
+    const A=this.A, items=A.byCat(cat.slug);
+    this.view.innerHTML=this.hero('Koleksiyon', cat.tr, items.length+' parça · 925 ayar gümüş, el işçiliği')+
+      `<section style="max-width:1360px;margin:0 auto;padding:30px 48px 70px;"><div class="rg3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:26px 24px;">${items.map(p=>this.cardHTML(p)).join('')}</div></section>`;
+    this.refreshBadges();
+  }
+
+  renderDoc(slug){
+    const c=this.CONTENT[slug];
+    this.view.innerHTML=this.hero(c.kicker,c.title,c.sub)+
+      `<section style="max-width:${c.wide?'1360':'900'}px;margin:0 auto;padding:26px 48px 72px;" class="doc">${c.html}</section>`;
+    if(slug==='sss') this.wireAccordion();
+    this.refreshBadges();
+  }
+
+  wireAccordion(){
+    this.view.querySelectorAll('.acc-q').forEach(q=>{
+      q.addEventListener('click',()=>{
+        const a=q.nextElementSibling, open=a.style.maxHeight&&a.style.maxHeight!=='0px';
+        this.view.querySelectorAll('.acc-a').forEach(x=>{x.style.maxHeight='0px';});
+        this.view.querySelectorAll('.acc-q span[data-plus]').forEach(x=>x.textContent='+');
+        if(!open){ a.style.maxHeight=a.scrollHeight+40+'px'; const pl=q.querySelector('[data-plus]'); if(pl)pl.textContent='−'; }
+      });
+    });
+  }
+
+  /* ---------- product card (shared) ---------- */
+  cardHTML(p){
+    const A=this.A;
+    return `<div class="prodcard" data-id="${p.id}" style="display:flex;flex-direction:column;gap:14px;background:#FFFFFF;border:1px solid rgba(198,164,92,.14);border-radius:10px;padding:14px;cursor:pointer;">
+      <div style="position:relative;aspect-ratio:4/5;background:#EDE4D5;border-radius:6px;overflow:hidden;">
+        <image-slot id="slot-${p.id}" shape="rect" fit="cover" placeholder="Ürün görseli"></image-slot>
+        ${p.tag?`<span style="position:absolute;top:12px;left:12px;background:linear-gradient(180deg,#E4CE92,#A9812F);color:#0F1A2E;font-family:'Outfit';font-weight:700;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:5px 11px;border-radius:999px;pointer-events:none;z-index:2;">${p.tag}</span>`:''}
+        <div class="heart" data-fav="${p.id}" style="position:absolute;top:10px;right:10px;z-index:3;">${this.heartSVG(A.isFav(p.id))}</div>
+        <div class="quick" style="position:absolute;left:12px;right:12px;bottom:12px;z-index:2;"><button class="gold-btn" data-quick="${p.id}" style="width:100%;padding:11px;font-size:11px;">Hızlı Bakış</button></div>
+      </div>
+      <div>
+        <div style="font-family:'Outfit';font-weight:500;font-size:17px;color:#22314B;">${p.name}</div>
+        <div style="font-family:'Outfit';font-weight:400;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:#737D90;margin-top:4px;">${p.material}${p.length&&p.length!=='—'?' · '+p.length:''}</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:13px;">
+          <div style="display:flex;align-items:baseline;gap:8px;"><span style="font-family:'Outfit';font-weight:600;font-size:19px;color:#8A6A16;">${A.fmt(p.price)}</span>${p.old?`<span style="font-family:'Outfit';font-weight:400;font-size:13px;color:#6E7A90;text-decoration:line-through;">${A.fmt(p.old)}</span>`:''}</div>
+          <button class="gold-btn" data-add="${p.id}" style="padding:10px 16px;font-size:11px;">Sepete Ekle</button>
+        </div>
+      </div>
+    </div>`;
+  }
+  heartSVG(on){
+    return on?`<svg width="18" height="18" viewBox="0 0 24 24" fill="#E4CE92" stroke="#E4CE92" stroke-width="1.3"><path d="M12 20s-7-4.6-9.3-8.4C1 8.5 2.5 5 6 5c2 0 3.2 1.2 4 2.3C10.8 6.2 12 5 14 5c3.5 0 5 3.5 3.3 6.6C19 15.4 12 20 12 20z"/></svg>`
+      :`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E4CE92" stroke-width="1.5"><path d="M12 20s-7-4.6-9.3-8.4C1 8.5 2.5 5 6 5c2 0 3.2 1.2 4 2.3C10.8 6.2 12 5 14 5c3.5 0 5 3.5 3.3 6.6C19 15.4 12 20 12 20z"/></svg>`;
+  }
+
+  /* ---------- overlays (shared) ---------- */
+  open(name){ const ov=this.root.querySelector('[data-ov="'+name+'"]'); if(!ov)return; if(name==='cart')this.renderCart(); ov.classList.add('open'); document.body.style.overflow='hidden'; }
+  closeAll(){ this.root.querySelectorAll('.ov.open').forEach(o=>o.classList.remove('open')); document.body.style.overflow=''; }
+  toast(msg){ const t=this.root.querySelector('[data-toast]'); if(!t)return; t.textContent=msg; t.classList.add('show'); clearTimeout(this._tt); this._tt=setTimeout(()=>t.classList.remove('show'),1900); }
+  refreshBadges(){ const b=this.root.querySelector('[data-cart-count]'); if(!b||!this.A)return; const n=this.A.cartCount(); b.textContent=n; b.style.opacity=n>0?'1':'0'; this.root.querySelectorAll('[data-fav]').forEach(el=>{el.innerHTML=this.heartSVG(this.A.isFav(el.dataset.fav));}); }
+
+  renderCart(){
+    const A=this.A, body=this.root.querySelector('[data-cart-body]'), foot=this.root.querySelector('[data-cart-foot]');
+    const cart=A.getCart(), ids=Object.keys(cart);
+    if(!ids.length){ body.innerHTML=`<div style="text-align:center;padding:60px 10px;color:#737D90;"><div style="font-family:'Great Vibes',cursive;font-size:40px;color:#A9812F;margin-bottom:8px;">Sepetiniz boş</div><div style="font-family:'Outfit';font-size:13px;">Beğendiğiniz parçaları buraya ekleyin.</div></div>`; foot.innerHTML=`<button class="ghost-btn" data-close style="width:100%;padding:14px;">Alışverişe Devam Et</button>`; return; }
+    body.innerHTML=ids.map(id=>{const p=A.byId(id);if(!p)return'';const q=cart[id];
+      return `<div style="display:flex;gap:14px;padding:14px 0;border-bottom:1px solid rgba(198,164,92,.12);">
+        <div style="width:70px;height:88px;border-radius:6px;overflow:hidden;background:#FFFFFF;flex:none;"><image-slot id="slot-${id}" shape="rect" fit="cover" placeholder=""></image-slot></div>
+        <div style="flex:1;"><div style="font-family:'Outfit';font-weight:500;font-size:15px;color:#22314B;">${p.name}</div>
+          <div style="font-family:'Outfit';font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#737D90;margin-top:3px;">${p.material}</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;"><div style="display:flex;align-items:center;gap:8px;"><button class="qtybtn" data-dec="${id}">−</button><span style="font-family:'Outfit';font-weight:600;color:#22314B;min-width:18px;text-align:center;">${q}</span><button class="qtybtn" data-inc="${id}">+</button></div><div style="font-family:'Outfit';font-weight:600;font-size:15px;color:#8A6A16;">${A.fmt(p.price*q)}</div></div>
+        </div>
+        <button class="icobtn" data-remove="${id}" style="align-self:flex-start;" aria-label="Kaldır"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#737D90" stroke-width="1.5"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></button>
+      </div>`;}).join('');
+    const total=A.cartTotal(), ship=total>=1500||total===0?0:60;
+    foot.innerHTML=`<div style="display:flex;justify-content:space-between;font-family:'Outfit';font-size:13px;color:#5C6678;margin-bottom:7px;"><span>Ara Toplam</span><span>${A.fmt(total)}</span></div>
+      <div style="display:flex;justify-content:space-between;font-family:'Outfit';font-size:13px;color:#5C6678;margin-bottom:12px;"><span>Kargo</span><span>${ship===0?'Ücretsiz':A.fmt(ship)}</span></div>
+      <div style="display:flex;justify-content:space-between;font-family:'Outfit';font-weight:600;font-size:17px;color:#22314B;margin-bottom:16px;"><span>Toplam</span><span style="color:#8A6A16;">${A.fmt(total+ship)}</span></div>
+      <button class="gold-btn" data-checkout style="width:100%;padding:15px;font-size:12px;">Ödemeye Geç</button>
+      <div style="text-align:center;font-family:'Outfit';font-size:11px;color:#6E7A90;margin-top:10px;">🔒 256-bit SSL ile güvenli ödeme</div>`;
+  }
+
+  openQuick(id){
+    const A=this.A,p=A.byId(id);if(!p)return;
+    const body=this.root.querySelector('[data-quick-body]');
+    const specs=[['Malzeme',p.material],['Ölçü',p.length],['Ağırlık',p.weight],['Taş',p.stone]].filter(r=>r[1]&&r[1]!=='—');
+    body.innerHTML=`<button class="icobtn" data-close style="position:absolute;top:14px;right:14px;z-index:4;background:rgba(255,255,255,.9);border-radius:50%;" aria-label="Kapat"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A6A16" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></button>
+      <div class="qvgrid" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);">
+        <div style="position:relative;aspect-ratio:1/1;background:#FFFFFF;"><image-slot id="slot-${id}" shape="rect" fit="cover" placeholder="Ürün görseli"></image-slot>${p.tag?`<span style="position:absolute;top:16px;left:16px;background:linear-gradient(180deg,#E4CE92,#A9812F);color:#0F1A2E;font-family:'Outfit';font-weight:700;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:5px 12px;border-radius:999px;">${p.tag}</span>`:''}</div>
+        <div class="qvpad" style="padding:46px 44px;display:flex;flex-direction:column;">
+          <div style="font-family:'Outfit';font-weight:600;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#A9812F;margin-bottom:10px;">${A.categories.find(c=>c.slug===p.cat)?.tr||''}</div>
+          <h3 style="font-family:'Great Vibes',cursive;font-weight:400;font-size:44px;line-height:1;color:#22314B;">${p.name}</h3>
+          <div style="display:flex;align-items:baseline;gap:10px;margin-top:14px;"><span style="font-family:'Outfit';font-weight:600;font-size:26px;color:#8A6A16;">${A.fmt(p.price)}</span>${p.old?`<span style="font-family:'Outfit';font-size:16px;color:#6E7A90;text-decoration:line-through;">${A.fmt(p.old)}</span>`:''}</div>
+          <p style="font-family:'Outfit';font-weight:300;font-size:14px;line-height:1.7;color:#46516A;margin-top:16px;">${p.desc}</p>
+          <div style="margin-top:18px;border-top:1px solid rgba(198,164,92,.16);padding-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;">${specs.map(r=>`<div><div style="font-family:'Outfit';font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#737D90;">${r[0]}</div><div style="font-family:'Outfit';font-weight:500;font-size:14px;color:#22314B;margin-top:2px;">${r[1]}</div></div>`).join('')}</div>
+          <div style="margin-top:auto;padding-top:22px;display:flex;gap:10px;align-items:center;"><div style="display:flex;align-items:center;gap:8px;"><button class="qtybtn" data-qv-dec>−</button><span data-qv-qty style="font-family:'Outfit';font-weight:600;color:#22314B;min-width:22px;text-align:center;">1</span><button class="qtybtn" data-qv-inc>+</button></div><button class="gold-btn" data-qv-add="${id}" style="flex:1;padding:15px;font-size:12px;">Sepete Ekle</button><div class="heart" data-fav="${id}" style="flex:none;">${this.heartSVG(A.isFav(id))}</div></div>
+        </div>
+      </div>`;
+    this._qvQty=1; this.open('quick');
+  }
+
+  renderAccount(tab){
+    const body=this.root.querySelector('[data-acc-body]'); if(!body)return;
+    const _tr=this.root.querySelector('[data-tab]'), _row=_tr?_tr.parentElement:null;
+    if(this.A.isLoggedIn()){ if(_row)_row.style.display='none'; body.innerHTML=this.accountDash(); return; }
+    if(_row)_row.style.display='flex';
+    this.root.querySelectorAll('[data-tab]').forEach(t=>t.classList.toggle('on',t.dataset.tab===tab));
+    const A=this.A, favs=Object.keys(A.getFavs());
+    const favBlock=favs.length?`<div style="margin-top:22px;border-top:1px solid rgba(198,164,92,.16);padding-top:16px;"><div style="font-family:'Outfit';font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#A9812F;margin-bottom:12px;">Favorilerim (${favs.length})</div><div style="display:flex;flex-direction:column;gap:8px;">${favs.map(id=>{const p=A.byId(id);return p?`<button data-quick="${id}" style="display:flex;align-items:center;gap:10px;background:#FFFFFF;border:1px solid rgba(198,164,92,.12);border-radius:8px;padding:8px;cursor:pointer;text-align:left;"><div style="width:36px;height:44px;border-radius:5px;overflow:hidden;background:#EDE4D5;"><image-slot id="slot-${id}" shape="rect" fit="cover" placeholder=""></image-slot></div><span style="font-family:'Outfit';font-size:13px;color:#22314B;flex:1;">${p.name}</span><span style="font-family:'Outfit';font-weight:600;font-size:13px;color:#8A6A16;">${A.fmt(p.price)}</span></button>`:'';}).join('')}</div></div>`:'';
+    if(tab==='register'){
+      body.innerHTML=`<div style="display:flex;flex-direction:column;gap:12px;"><input class="fld" placeholder="Ad Soyad"><input class="fld" placeholder="E-posta" type="email"><input class="fld" placeholder="Telefon" type="tel"><input class="fld" placeholder="Şifre" type="password"><button class="gold-btn" data-login-submit style="padding:14px;font-size:12px;margin-top:4px;">Hesap Oluştur</button><div style="font-family:'Outfit';font-size:11px;color:#6E7A90;text-align:center;line-height:1.6;">Kaydolarak <a data-route="kvkk" href="#/kvkk">KVKK</a> ve <a data-route="gizlilik" href="#/gizlilik">Gizlilik Politikası</a>'nı kabul edersiniz.</div></div>${favBlock}`;
+    } else {
+      body.innerHTML=`<div style="display:flex;flex-direction:column;gap:12px;"><input class="fld" placeholder="E-posta" type="email"><input class="fld" placeholder="Şifre" type="password"><div style="text-align:right;"><a href="#" style="font-family:'Outfit';font-size:12px;">Şifremi unuttum</a></div><button class="gold-btn" data-login-submit style="padding:14px;font-size:12px;">Giriş Yap</button><button class="ghost-btn" data-demo-login style="padding:13px;font-size:12px;">Demo Hesabıyla Gir</button></div>${favBlock}`;
+    }
+  }
+
+  /* ---------- events ---------- */
+  wireEvents(){
+    const root=this.root,A=this.A;
+    root.addEventListener('click',(e)=>{
+      const t=e.target;
+      if(t.closest('[data-home]')){ e.preventDefault(); window.location.href=this.HOME; return; }
+      const openBtn=t.closest('[data-open]'); if(openBtn){ e.preventDefault(); this.open(openBtn.dataset.open); return; }
+      if(t.closest('[data-close]')){ this.closeAll(); return; }
+      const tab=t.closest('[data-tab]'); if(tab){ this.renderAccount(tab.dataset.tab); return; }
+      const quick=t.closest('[data-quick]'); if(quick){ this.closeAll(); this.openQuick(quick.dataset.quick); return; }
+      const fav=t.closest('[data-fav]'); if(fav){ e.stopPropagation(); const on=A.toggleFav(fav.dataset.fav); this.toast(on?'Favorilere eklendi ♥':'Favorilerden çıkarıldı'); this.refreshBadges(); return; }
+      const add=t.closest('[data-add]'); if(add){ e.stopPropagation(); A.addToCart(add.dataset.add,1); this.toast('Sepete eklendi ✓'); add.textContent='Eklendi ✓'; setTimeout(()=>{add.textContent='Sepete Ekle';},1100); return; }
+      const qvAdd=t.closest('[data-qv-add]'); if(qvAdd){ A.addToCart(qvAdd.dataset.qvAdd,this._qvQty||1); this.toast(this._qvQty+' adet sepete eklendi ✓'); this.closeAll(); setTimeout(()=>this.open('cart'),260); return; }
+      if(t.closest('[data-qv-inc]')){ this._qvQty=(this._qvQty||1)+1; const q=root.querySelector('[data-qv-qty]'); if(q)q.textContent=this._qvQty; return; }
+      if(t.closest('[data-qv-dec]')){ this._qvQty=Math.max(1,(this._qvQty||1)-1); const q=root.querySelector('[data-qv-qty]'); if(q)q.textContent=this._qvQty; return; }
+      const inc=t.closest('[data-inc]'); if(inc){ A.setQty(inc.dataset.inc,(A.getCart()[inc.dataset.inc]||0)+1); this.renderCart(); return; }
+      const dec=t.closest('[data-dec]'); if(dec){ A.setQty(dec.dataset.dec,(A.getCart()[dec.dataset.dec]||0)-1); this.renderCart(); return; }
+      const rm=t.closest('[data-remove]'); if(rm){ A.removeFromCart(rm.dataset.remove); this.renderCart(); return; }
+      if(t.closest('[data-checkout]')){ this.toast('Sipariş alındı! Demo — teşekkürler ✓'); A.clearCart(); this.renderCart(); return; }
+      if(t.closest('[data-login-submit]')){ const box=root.querySelector('[data-acc-body]'); const em=box.querySelector('input[type="email"]'), nm=box.querySelector('input[placeholder="Ad Soyad"]'); A.login(em&&em.value, nm&&nm.value); this.toast('Hoş geldiniz ♦'); this.renderAccount('login'); return; }
+      if(t.closest('[data-demo-login]')){ A.login('demo@aytekinjewelry.com','Demo Kullanıcı'); this.toast('Demo hesabıyla giriş yapıldı ✓'); this.renderAccount('login'); return; }
+      if(t.closest('[data-logout]')){ A.logout(); this.toast('Çıkış yapıldı'); this.renderAccount('login'); return; }
+      if(t.closest('[data-acc-submit]')){ this.toast('Mesajınız alındı — teşekkürler ✓'); return; }
+      const card=t.closest('.prodcard'); if(card&&card.dataset.id){ this.openQuick(card.dataset.id); return; }
+    });
+    document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') this.closeAll(); });
+  }
+
+  get CONTENT(){ return this.buildContent(); }
+  buildContent(){
+    const faq=[
+      ['Gümüşleriniz gerçekten 925 ayar mı?','Evet. Tüm ürünlerimiz 925 ayar (sterling) gümüşten üretilir ve damgalıdır. Talep eden müşterilerimize ürünle birlikte ayar belgesi sunuyoruz.'],
+      ['Siparişim ne zaman kargoya verilir?','Stoktaki ürünler 1-2 iş günü içinde kargoya teslim edilir. Kişiye özel üretim parçalar için hazırlık süresi 3-5 iş günüdür. 1.500 ₺ ve üzeri siparişlerde kargo ücretsizdir.'],
+      ['İade ve değişim yapabilir miyim?','Ürünü teslim aldığınız tarihten itibaren 14 gün içinde, kullanılmamış ve orijinal ambalajında olması koşuluyla iade/değişim yapabilirsiniz. Kişiye özel üretilen ürünler bu kapsam dışındadır.'],
+      ['Kişiye özel üretim yapıyor musunuz?','Evet. İsim, harf, tarih yazımı; lazer markalama, çizim ve özel tasarım siparişleri alıyoruz. Sipariş notuna detayları yazmanız veya WhatsApp\'tan bize ulaşmanız yeterli.'],
+      ['Gümüş kararırsa ne yapmalıyım?','Gümüş, havayla temas ederek zamanla matlaşabilir. Kuru bir gümüş bezi ile parlatabilir; nem ve parfümden uzak, kapalı bir kutuda saklayabilirsiniz. Mağazamızda ücretsiz parlatma da yapıyoruz.'],
+      ['Hangi ödeme yöntemlerini kabul ediyorsunuz?','Kredi/banka kartı, havale/EFT ve kapıda ödeme seçeneklerimiz mevcuttur. Tüm kart ödemeleri 256-bit SSL ile güvence altındadır.'],
+      ['Yüzük ölçümü nasıl belirlerim?','Mevcut bir yüzüğünüzün iç çapını ölçüp bize iletebilir veya mağazamıza gelerek ölçü aldırabilirsiniz. Emin değilseniz WhatsApp\'tan ölçü rehberimizi paylaşabiliriz.']
+    ];
+    const legalNote=`<div style="background:#FFFFFF;border:1px solid rgba(198,164,92,.18);border-radius:10px;padding:16px 18px;margin-bottom:8px;"><p style="font-family:'Outfit';font-weight:300;font-size:13px;color:#737D90;line-height:1.7;margin:0;">Bu metin bir örnek şablondur; yayına almadan önce firma unvanı, vergi/MERSİS bilgileri ve güncel yasal düzenlemeler doğrultusunda hukuk danışmanınızla gözden geçirilmelidir.</p></div>`;
+    const seller=`<h4>Satıcı Bilgileri</h4><ul><li><strong>Ünvan:</strong> Aytekin Mücevherat</li><li><strong>Adres:</strong> İskenderun, Hatay</li><li><strong>Telefon:</strong> +90 555 000 00 00</li><li><strong>E-posta:</strong> info@aytekinjewelry.com</li></ul>`;
+    return {
+      hakkinda:{ kicker:'Hikâyemiz', title:'Hakkımızda', wide:true, sub:'İskenderun\'da küçük bir tezgâhta başlayan yolculuk, bugün elden geçen her parçaya sinen bir ustalığa dönüştü.',
+        html:`<div class="doc-grid" style="display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:start;">
+          <div>
+            <p>Aytekin Mücevherat, <strong>2008 yılında İskenderun\'da</strong> aile emeğiyle kuruldu. İlk günden bu yana tek bir şeye inandık: bir takı, sahibinin hikâyesini taşıdığında değer kazanır.</p>
+            <p>Atölyemizde her parça <strong>925 ayar gümüşten, el işçiliğiyle</strong> üretilir. Zincirin örülüşünden taşın oturuşuna kadar tüm aşamalar usta ellerden geçer. Seri üretimin hızını değil, elin sıcaklığını tercih ettik.</p>
+            <p>Yıllar içinde yalnızca satan değil, <strong>onaran</strong> bir yer olduk: kopan bir kolye, daralan bir yüzük, anneden kalan bir yadigâr… Elden geçen her parçayı ilk günkü haline döndürmek bizim işimiz.</p>
+            <p>Bugün aynı tezgâhın başında, aynı özenle çalışıyoruz. Sizden gelen her sipariş, bir hikâyenin devamı oluyor.</p>
+            <h4>Değerlerimiz</h4>
+            <ul><li><strong>Gerçek gümüş:</strong> Damgalı 925 ayar, ayar belgesiyle.</li><li><strong>El işçiliği:</strong> Her parça atölyede, tek tek.</li><li><strong>Kişiye özel:</strong> İsim, tarih, tasarım — sizin gibi biricik.</li><li><strong>Ömür boyu servis:</strong> Bakım, parlatma ve tamir desteği.</li></ul>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div style="aspect-ratio:4/5;border-radius:12px;overflow:hidden;background:#FFFFFF;border:1px solid rgba(198,164,92,.16);"><image-slot id="about-1" shape="rect" fit="cover" placeholder="Atölye / mağaza fotoğrafı"></image-slot></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+              <div style="background:#FFFFFF;border:1px solid rgba(198,164,92,.16);border-radius:12px;padding:20px;text-align:center;"><div style="font-family:'Great Vibes',cursive;font-size:44px;color:#8A6A16;line-height:1;">16+</div><div style="font-family:'Outfit';font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#737D90;margin-top:6px;">Yıllık tecrübe</div></div>
+              <div style="background:#FFFFFF;border:1px solid rgba(198,164,92,.16);border-radius:12px;padding:20px;text-align:center;"><div style="font-family:'Great Vibes',cursive;font-size:44px;color:#8A6A16;line-height:1;">925</div><div style="font-family:'Outfit';font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#737D90;margin-top:6px;">Ayar gümüş</div></div>
+            </div>
+          </div>
+        </div>` },
+      sss:{ kicker:'Yardım', title:'Sıkça Sorulan Sorular', sub:'Aklınıza takılanlar burada. Bulamadığınız bir konu olursa WhatsApp\'tan yazmanız yeterli.',
+        html:`<div style="display:flex;flex-direction:column;gap:12px;">${faq.map(([q,a])=>`<div><button class="acc-q">${q}<span data-plus style="color:#E4CE92;font-size:22px;font-weight:300;flex:none;">+</span></button><div class="acc-a"><div style="padding:16px 20px 4px;">${a}</div></div></div>`).join('')}</div>` },
+      iletisim:{ kicker:'Bize Ulaşın', title:'İletişim', sub:'Mağazamıza bekler, sorularınızı memnuniyetle yanıtlarız.',
+        html:`<div class="doc-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;">
+          <div><h4>Mağaza</h4><ul><li><strong>Adres:</strong> İskenderun, Hatay</li><li><strong>Telefon:</strong> +90 555 000 00 00</li><li><strong>WhatsApp:</strong> +90 555 000 00 00</li><li><strong>E-posta:</strong> info@aytekinjewelry.com</li><li><strong>Instagram:</strong> <a href="https://instagram.com/aytekinjewelry" target="_blank">@aytekinjewelry</a></li></ul>
+            <h4>Çalışma Saatleri</h4><ul><li>Pazartesi – Cumartesi: 09:30 – 20:00</li><li>Pazar: 12:00 – 18:00</li></ul>
+            <div style="display:flex;gap:10px;margin-top:18px;"><a href="https://instagram.com/aytekinjewelry" target="_blank" class="gold-btn" style="padding:13px 22px;font-size:12px;display:inline-flex;align-items:center;">Instagram\'da Takip Et</a><a href="#" data-open="wa" class="ghost-btn" style="padding:13px 22px;font-size:12px;display:inline-flex;align-items:center;">WhatsApp Sipariş</a></div>
+          </div>
+          <div><h4>Mesaj Gönderin</h4><div style="display:flex;flex-direction:column;gap:12px;margin-top:6px;"><input class="fld" placeholder="Adınız"><input class="fld" placeholder="E-posta" type="email"><textarea class="fld" placeholder="Mesajınız" rows="5" style="resize:vertical;font-family:'Outfit';"></textarea><button class="gold-btn" data-acc-submit style="padding:14px;font-size:12px;">Gönder</button></div>
+            <div style="margin-top:16px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#FFFFFF;border:1px solid rgba(198,164,92,.16);display:grid;place-items:center;"><span style="font-family:'Outfit';font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#6E7A90;">Harita · İskenderun</span></div>
+          </div>
+        </div>` },
+      'mesafeli-satis':{ kicker:'Sözleşme', title:'Mesafeli Satış Sözleşmesi',
+        html:`${legalNote}<h4>1. Taraflar</h4><p>İşbu sözleşme, <strong>Satıcı</strong> (Aytekin Mücevherat) ile web sitesi üzerinden sipariş veren <strong>Alıcı</strong> arasında, 6502 sayılı Tüketicinin Korunması Hakkında Kanun ve Mesafeli Sözleşmeler Yönetmeliği kapsamında akdedilmiştir.</p>${seller}
+          <h4>2. Sözleşmenin Konusu</h4><p>Sözleşmenin konusu, Alıcı\'nın elektronik ortamda sipariş verdiği ürünün nitelik ve satış fiyatı ile teslimatına ilişkin hükümlerdir. Ürün bilgileri ve fiyatlar sipariş anında sitede belirtilen şekildedir.</p>
+          <h4>3. Cayma Hakkı</h4><p>Alıcı, ürünü teslim aldığı tarihten itibaren <strong>14 gün</strong> içinde herhangi bir gerekçe göstermeksizin cayma hakkına sahiptir. Cayma bildirimini iletişim kanallarımız üzerinden yapabilirsiniz. Kişiye özel üretilen ürünler cayma hakkı kapsamı dışındadır.</p>
+          <h4>4. Teslimat</h4><p>Ürün, Alıcı\'nın belirttiği adrese anlaşmalı kargo firması ile teslim edilir. Stoktaki ürünler 1-2 iş günü içinde kargoya verilir.</p>
+          <h4>5. Genel Hükümler</h4><ul><li>Alıcı, ürün siparişini onaylamakla işbu sözleşme şartlarını kabul etmiş sayılır.</li><li>Uyuşmazlıklarda Alıcı\'nın yerleşim yerindeki Tüketici Hakem Heyetleri ve Tüketici Mahkemeleri yetkilidir.</li></ul>` },
+      gizlilik:{ kicker:'Politika', title:'Gizlilik & Çerez Politikası',
+        html:`${legalNote}<h4>Topladığımız Veriler</h4><p>Sipariş ve iletişim süreçlerinde ad-soyad, adres, telefon ve e-posta gibi bilgilerinizi yalnızca hizmetin sunulması amacıyla topluyoruz.</p>
+          <h4>Verilerin Kullanımı</h4><ul><li>Siparişin hazırlanması ve teslimi</li><li>Fatura ve yasal yükümlülükler</li><li>İzin vermeniz halinde kampanya bilgilendirmeleri</li></ul>
+          <h4>Çerezler (Cookies)</h4><p>Sitemiz; sepet, oturum ve tercihlerin hatırlanması için çerezler kullanır. Tarayıcı ayarlarınızdan çerezleri yönetebilir veya reddedebilirsiniz. Bazı çerezlerin engellenmesi site işlevlerini etkileyebilir.</p>
+          <h4>Üçüncü Taraflar</h4><p>Verileriniz, teslimat ve ödeme altyapısı gibi zorunlu hizmet sağlayıcılar dışında üçüncü kişilerle paylaşılmaz, satılmaz.</p>` },
+      kvkk:{ kicker:'Aydınlatma', title:'KVKK Aydınlatma Metni',
+        html:`${legalNote}<h4>Veri Sorumlusu</h4><p>6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) uyarınca kişisel verileriniz, veri sorumlusu sıfatıyla Aytekin Mücevherat tarafından aşağıda açıklanan kapsamda işlenmektedir.</p>${seller}
+          <h4>İşleme Amaçları</h4><ul><li>Sipariş, teslimat ve satış sonrası hizmetlerin yürütülmesi</li><li>Yasal yükümlülüklerin yerine getirilmesi</li><li>İletişim ve talep yönetimi</li></ul>
+          <h4>Haklarınız (Md. 11)</h4><ul><li>Verilerinizin işlenip işlenmediğini öğrenme</li><li>İşlenmişse buna ilişkin bilgi talep etme</li><li>Düzeltilmesini veya silinmesini isteme</li><li>İşlemenin hukuka aykırılığı halinde itiraz etme</li></ul>
+          <p>Taleplerinizi <strong>info@aytekinjewelry.com</strong> adresine iletebilirsiniz.</p>` },
+      'iade-degisim':{ kicker:'Koşullar', title:'İade & Değişim',
+        html:`${legalNote}<h4>İade Koşulları</h4><ul><li>Ürünü teslim aldığınız tarihten itibaren <strong>14 gün</strong> içinde iade hakkınız vardır.</li><li>Ürün kullanılmamış, hasarsız ve orijinal ambalajında olmalıdır.</li><li>Kişiye özel üretilen (isim/tarih/lazer yazılı) ürünler iade kapsamı dışındadır.</li></ul>
+          <h4>Değişim</h4><p>Beden/ölçü değişimlerinde ürünü bize ulaştırmanız yeterlidir; uygun ölçü hazırlanıp tarafınıza gönderilir. İlk değişimde kargo tarafımıza aittir.</p>
+          <h4>İade Süreci</h4><ul><li>İletişim kanallarımızdan iade talebinizi iletin.</li><li>Ürünü anlaşmalı kargo ile gönderin.</li><li>İnceleme sonrası ücret iadeniz <strong>10 iş günü</strong> içinde aynı ödeme yöntemiyle yapılır.</li></ul>` },
+      'teslimat-iade':{ kicker:'Bilgi', title:'Teslimat & İade',
+        html:`${legalNote}<h4>Kargo & Teslimat</h4><ul><li>Stoktaki ürünler 1-2 iş günü içinde kargoya verilir.</li><li>Kişiye özel üretim: 3-5 iş günü hazırlık.</li><li><strong>1.500 ₺ ve üzeri</strong> siparişlerde kargo ücretsizdir; altındaki siparişlerde 60 ₺ kargo bedeli uygulanır.</li><li>Teslimat anlaşmalı kargo firması ile Türkiye geneline yapılır.</li></ul>
+          <h4>İade</h4><p>İade koşullarının tamamı için <a data-route="iade-degisim" href="#/iade-degisim">İade & Değişim</a> sayfamızı inceleyebilirsiniz.</p>` }
+    };
+  }
+
+  accountDash(){
+    const A=this.A, u=A.getUser(), favs=Object.keys(A.getFavs()), orders=A.orders();
+    const initials=(u.name||'A').split(' ').map(s=>s[0]).slice(0,2).join('').toUpperCase();
+    const orderRow=o=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(198,164,92,.14);"><div><div style="font-family:'Outfit';font-weight:600;font-size:13px;color:#22314B;">${o.no}</div><div style="font-family:'Outfit';font-size:11px;color:#737D90;margin-top:2px;">${o.date} · ${o.items.length} ürün</div></div><span style="font-family:'Outfit';font-weight:600;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:${o.status==='Kargoda'?'#8A6A16':'#3E7D5A'};">${o.status}</span></div>`;
+    const favRow=id=>{const p=A.byId(id);return p?`<button data-quick="${id}" style="display:flex;align-items:center;gap:10px;background:#FFFFFF;border:1px solid rgba(198,164,92,.18);border-radius:8px;padding:8px;cursor:pointer;text-align:left;"><div style="width:34px;height:42px;border-radius:5px;overflow:hidden;background:#EDE4D5;"><image-slot id="slot-${id}" shape="rect" fit="cover" placeholder=""></image-slot></div><span style="font-family:'Outfit';font-size:12.5px;color:#22314B;flex:1;">${p.name}</span><span style="font-family:'Outfit';font-weight:600;font-size:12.5px;color:#8A6A16;">${A.fmt(p.price)}</span></button>`:'';};
+    return `<div style="display:flex;align-items:center;gap:14px;margin-bottom:6px;">
+      <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(180deg,#E4CE92,#A9812F);display:grid;place-items:center;font-family:'Outfit';font-weight:700;font-size:18px;color:#22314B;">${initials}</div>
+      <div><div style="font-family:'Outfit';font-weight:600;font-size:16px;color:#22314B;">${u.name}</div><div style="font-family:'Outfit';font-size:12px;color:#737D90;">${u.email}</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0;">
+      <div style="background:#FFFFFF;border:1px solid rgba(198,164,92,.18);border-radius:10px;padding:14px;text-align:center;"><div style="font-family:'Great Vibes',cursive;font-size:32px;color:#8A6A16;line-height:1;">${orders.length}</div><div style="font-family:'Outfit';font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#737D90;margin-top:4px;">Sipariş</div></div>
+      <div style="background:#FFFFFF;border:1px solid rgba(198,164,92,.18);border-radius:10px;padding:14px;text-align:center;"><div style="font-family:'Great Vibes',cursive;font-size:32px;color:#8A6A16;line-height:1;">${favs.length}</div><div style="font-family:'Outfit';font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#737D90;margin-top:4px;">Favori</div></div>
+    </div>
+    <div style="font-family:'Outfit';font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#A9812F;margin-bottom:2px;">Siparişlerim</div>
+    ${orders.map(orderRow).join('')}
+    ${favs.length?`<div style="font-family:'Outfit';font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#A9812F;margin:18px 0 10px;">Favorilerim</div><div style="display:flex;flex-direction:column;gap:8px;">${favs.map(favRow).join('')}</div>`:''}
+    <button class="ghost-btn" data-logout style="width:100%;padding:13px;font-size:12px;margin-top:20px;">Çıkış Yap</button>`;
+  }
+
+  renderVals(){ return {}; }
+}
+</script>
+</body>
+</html>
