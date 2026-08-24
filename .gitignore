@@ -1,1 +1,4 @@
 .claude/
+
+# Sözleşmeler kendi bağımsız git deposudur, bu repoya dahil edilmez
+sozlesmeler/
