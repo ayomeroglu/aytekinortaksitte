@@ -2,3 +2,8 @@
 
 # Sözleşmeler kendi bağımsız git deposudur, bu repoya dahil edilmez
 sozlesmeler/
+
+# API anahtarları ve gizli bilgiler — asla depoya girmez
+.env
+.env.*
+*.key
